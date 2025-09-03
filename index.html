@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Off Prospecting Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        .container {
+            max-width: 28rem;
+            width: 100%;
+        }
+        .card {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1 class="text-3xl font-bold text-center text-gray-900 mb-2">Time Off Prospecting Calculator</h1>
+            <p class="text-center text-gray-500 mb-8">
+                Plan your time off proactively to ensure your pipeline stays strong.
+            </p>
+
+            <!-- Input Form -->
+            <div class="space-y-6">
+                <div>
+                    <label for="daysOff" class="block text-sm font-medium text-gray-700">Number of Days Off</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <input type="number" id="daysOff" placeholder="e.g., 5" class="block w-full rounded-md border-gray-300 py-2 pl-4 pr-12 focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out sm:text-sm">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 text-sm">Days</div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="daysToFrontload" class="block text-sm font-medium text-gray-700">Days Available to Frontload</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <input type="number" id="daysToFrontload" placeholder="e.g., 10" class="block w-full rounded-md border-gray-300 py-2 pl-4 pr-12 focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out sm:text-sm">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 text-sm">Days</div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="dailyActivities" class="block text-sm font-medium text-gray-700">Average Daily Prospecting Activities</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <input type="number" id="dailyActivities" placeholder="e.g., 50" class="block w-full rounded-md border-gray-300 py-2 pl-4 pr-12 focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out sm:text-sm">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 text-sm">Activities</div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="asp" class="block text-sm font-medium text-gray-700">Average Selling Price (ASP)</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500 text-sm">$</div>
+                        <input type="number" id="asp" placeholder="e.g., 15000" class="block w-full rounded-md border-gray-300 py-2 pl-8 focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out sm:text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="monthlyQuota" class="block text-sm font-medium text-gray-700">Monthly Quota</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500 text-sm">$</div>
+                        <input type="number" id="monthlyQuota" placeholder="e.g., 60000" class="block w-full rounded-md border-gray-300 py-2 pl-8 focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out sm:text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="closeRate" class="block text-sm font-medium text-gray-700">Close Rate</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <input type="number" id="closeRate" placeholder="e.g., 20" class="block w-full rounded-md border-gray-300 py-2 pl-4 pr-12 focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out sm:text-sm">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 text-sm">%</div>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-yellow-50 text-sm text-yellow-700 rounded-md">
+                    <p>
+                        This calculator assumes an industry-standard 5% conversion rate from prospecting activity to a qualified meeting.
+                        You can adjust the other inputs to see how it affects your goal.
+                    </p>
+                </div>
+            </div>
+
+            <button onclick="calculate()" class="mt-8 w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
+                Calculate My Goal
+            </button>
+
+            <!-- Results Section -->
+            <div id="results" class="hidden mt-8 p-6 bg-gray-50 rounded-lg shadow-inner">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Your Plan</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600">Total Activities Needed to Frontload:</span>
+                        <span id="activitiesGoal" class="text-xl font-bold text-indigo-600"></span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600">Daily Frontloading Goal:</span>
+                        <span id="dailyGoal" class="text-xl font-bold text-indigo-600"></span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600">Pipeline Value as % of Quota:</span>
+                        <span id="quotaPercentage" class="text-xl font-bold text-green-600"></span>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-semibold text-gray-800 mt-6 mb-4">Daily Goals to Hit Your KPIs</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600">Extra Talk Time:</span>
+                        <span id="dailyTalkTimeGoal" class="text-xl font-bold text-indigo-600"></span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600">Extra Discovery Calls:</span>
+                        <span id="dailyDiscoveryCallsGoal" class="text-xl font-bold text-indigo-600"></span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600">Extra Demos:</span>
+                        <span id="dailyDemosGoal" class="text-xl font-bold text-indigo-600"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message Box for alerts -->
+            <div id="message-box" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+                <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+                    <div class="mt-3 text-center">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">Input Error</h3>
+                        <div class="mt-2 px-7 py-3">
+                            <p id="message-text" class="text-sm text-gray-500"></p>
+                        </div>
+                        <div class="items-center px-4 py-3">
+                            <button id="close-message" class="px-4 py-2 bg-indigo-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                OK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const PROSPECTING_TO_MEETING_RATE = 0.05; // 5% conversion rate
+        const WORK_DAYS_PER_MONTH = 20; // Assumed average work days per month
+
+        function showMessage(text) {
+            document.getElementById('message-text').innerText = text;
+            document.getElementById('message-box').classList.remove('hidden');
+        }
+
+        document.getElementById('close-message').addEventListener('click', () => {
+            document.getElementById('message-box').classList.add('hidden');
+        });
+
+        function calculate() {
+            // Get input values
+            const daysOff = parseFloat(document.getElementById('daysOff').value);
+            const daysToFrontload = parseFloat(document.getElementById('daysToFrontload').value);
+            const dailyActivities = parseFloat(document.getElementById('dailyActivities').value);
+            const asp = parseFloat(document.getElementById('asp').value);
+            const monthlyQuota = parseFloat(document.getElementById('monthlyQuota').value);
+            const closeRate = parseFloat(document.getElementById('closeRate').value) / 100;
+
+            // Validate inputs
+            if (isNaN(daysOff) || daysOff <= 0) {
+                showMessage("Please enter a valid number of days off.");
+                return;
+            }
+            if (isNaN(daysToFrontload) || daysToFrontload <= 0) {
+                showMessage("Please enter a valid number of days to frontload.");
+                return;
+            }
+            if (isNaN(dailyActivities) || dailyActivities <= 0) {
+                showMessage("Please enter a valid number of daily prospecting activities.");
+                return;
+            }
+            if (isNaN(asp) || asp <= 0) {
+                showMessage("Please enter a valid Average Selling Price (ASP).");
+                return;
+            }
+            if (isNaN(monthlyQuota) || monthlyQuota <= 0) {
+                showMessage("Please enter a valid Monthly Quota.");
+                return;
+            }
+            if (isNaN(closeRate) || closeRate < 0 || closeRate > 1) {
+                showMessage("Please enter a valid close rate (between 0 and 100).");
+                return;
+            }
+
+            // Calculation Logic
+            // Based on user-provided KPIs
+            const TALK_TIME_PER_DAY = 15;
+            const DISCOVERY_CALLS_PER_MONTH = 20;
+            const DEMOS_PER_MONTH = 12;
+
+            // Step 1: Calculate the expected deals lost due to time off
+            const dealsLostPerDay = dailyActivities * PROSPECTING_TO_MEETING_RATE * closeRate;
+            const totalDealsLost = dealsLostPerDay * daysOff;
+
+            // Step 2: Calculate the number of activities needed to generate those deals
+            const activitiesGoal = Math.ceil(totalDealsLost / (PROSPECTING_TO_MEETING_RATE * closeRate));
+
+            // Step 3: Calculate the daily frontloading goal for activities
+            const dailyGoal = Math.ceil(activitiesGoal / daysToFrontload);
+
+            // Step 4: Calculate the total pipeline value that would be missed
+            const pipelineValuePreserved = totalDealsLost * asp;
+
+            // Step 5: Calculate the pipeline value as a percentage of the monthly quota
+            const quotaPercentage = (pipelineValuePreserved / monthlyQuota) * 100;
+
+            // New Calculations for additional KPIs
+            const missedTalkTime = daysOff * TALK_TIME_PER_DAY;
+            const dailyTalkTimeGoal = Math.ceil(missedTalkTime / daysToFrontload);
+
+            const missedDiscoveryCalls = (DISCOVERY_CALLS_PER_MONTH / WORK_DAYS_PER_MONTH) * daysOff;
+            const dailyDiscoveryCallsGoal = Math.ceil(missedDiscoveryCalls / daysToFrontload);
+
+            const missedDemos = (DEMOS_PER_MONTH / WORK_DAYS_PER_MONTH) * daysOff;
+            const dailyDemosGoal = Math.ceil(missedDemos / daysToFrontload);
+
+
+            // Display results
+            document.getElementById('activitiesGoal').innerText = activitiesGoal.toLocaleString();
+            document.getElementById('dailyGoal').innerText = dailyGoal.toLocaleString();
+            document.getElementById('quotaPercentage').innerText = quotaPercentage.toFixed(1) + "%";
+            document.getElementById('dailyTalkTimeGoal').innerText = dailyTalkTimeGoal.toLocaleString() + " mins";
+            document.getElementById('dailyDiscoveryCallsGoal').innerText = dailyDiscoveryCallsGoal.toLocaleString();
+            document.getElementById('dailyDemosGoal').innerText = dailyDemosGoal.toLocaleString();
+            
+            document.getElementById('results').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
