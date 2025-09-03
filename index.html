@@ -60,26 +60,45 @@
                 </div>
 
                 <div>
-                    <label for="dailyActivities" class="block text-sm font-medium text-gray-700">Average Daily Prospecting Activities</label>
+                    <label for="calls" class="block text-sm font-medium text-gray-700">Monthly Calls - KPI is 500</label>
                     <div class="mt-1 relative rounded-md shadow-sm">
-                        <input type="number" id="dailyActivities" placeholder="e.g., 50" class="block w-full rounded-md border-gray-300 py-2 pl-4 pr-12 focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out sm:text-sm">
-                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 text-sm">Activities</div>
+                        <input type="number" id="calls" placeholder="e.g., 500" class="block w-full rounded-md border-gray-300 py-2 pl-4 focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out sm:text-sm">
                     </div>
                 </div>
 
                 <div>
-                    <label for="asp" class="block text-sm font-medium text-gray-700">Average Selling Price (ASP)</label>
+                    <label for="emails" class="block text-sm font-medium text-gray-700">Monthly Emails - KPI is 600</label>
                     <div class="mt-1 relative rounded-md shadow-sm">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500 text-sm">$</div>
-                        <input type="number" id="asp" placeholder="e.g., 15000" class="block w-full rounded-md border-gray-300 py-2 pl-8 focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out sm:text-sm">
+                        <input type="number" id="emails" placeholder="e.g., 600" class="block w-full rounded-md border-gray-300 py-2 pl-4 focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out sm:text-sm">
                     </div>
                 </div>
 
                 <div>
-                    <label for="monthlyQuota" class="block text-sm font-medium text-gray-700">Monthly Quota</label>
+                    <label for="deals" class="block text-sm font-medium text-gray-700">Monthly Deals Created - KPI is 25</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <input type="number" id="deals" placeholder="e.g., 25" class="block w-full rounded-md border-gray-300 py-2 pl-4 focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out sm:text-sm">
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="discoveryCalls" class="block text-sm font-medium text-gray-700">Monthly Discovery Calls - KPI is 20</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <input type="number" id="discoveryCalls" placeholder="e.g., 20" class="block w-full rounded-md border-gray-300 py-2 pl-4 focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out sm:text-sm">
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="demos" class="block text-sm font-medium text-gray-700">Monthly Demos - KPI is 12</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <input type="number" id="demos" placeholder="e.g., 12" class="block w-full rounded-md border-gray-300 py-2 pl-4 focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out sm:text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="monthlyQuota" class="block text-sm font-medium text-gray-700">Monthly Quota - KPI is $6060</label>
                     <div class="mt-1 relative rounded-md shadow-sm">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500 text-sm">$</div>
-                        <input type="number" id="monthlyQuota" placeholder="e.g., 60000" class="block w-full rounded-md border-gray-300 py-2 pl-8 focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out sm:text-sm">
+                        <input type="number" id="monthlyQuota" placeholder="e.g., 6060" class="block w-full rounded-md border-gray-300 py-2 pl-8 focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out sm:text-sm">
                     </div>
                 </div>
 
@@ -89,13 +108,6 @@
                         <input type="number" id="closeRate" placeholder="e.g., 20" class="block w-full rounded-md border-gray-300 py-2 pl-4 pr-12 focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out sm:text-sm">
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 text-sm">%</div>
                     </div>
-                </div>
-
-                <div class="p-4 bg-yellow-50 text-sm text-yellow-700 rounded-md">
-                    <p>
-                        This calculator assumes an industry-standard 5% conversion rate from prospecting activity to a qualified meeting.
-                        You can adjust the other inputs to see how it affects your goal.
-                    </p>
                 </div>
             </div>
 
@@ -135,6 +147,14 @@
                         <span class="text-gray-600">Extra Demos:</span>
                         <span id="dailyDemosGoal" class="text-xl font-bold text-indigo-600"></span>
                     </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600">Extra Calls:</span>
+                        <span id="dailyCallsGoal" class="text-xl font-bold text-indigo-600"></span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600">Extra Emails:</span>
+                        <span id="dailyEmailsGoal" class="text-xl font-bold text-indigo-600"></span>
+                    </div>
                 </div>
             </div>
 
@@ -159,8 +179,7 @@
     </div>
 
     <script>
-        const PROSPECTING_TO_MEETING_RATE = 0.05; // 5% conversion rate
-        const WORK_DAYS_PER_MONTH = 20; // Assumed average work days per month
+        const WORK_DAYS_PER_MONTH = 20;
 
         function showMessage(text) {
             document.getElementById('message-text').innerText = text;
@@ -175,10 +194,14 @@
             // Get input values
             const daysOff = parseFloat(document.getElementById('daysOff').value);
             const daysToFrontload = parseFloat(document.getElementById('daysToFrontload').value);
-            const dailyActivities = parseFloat(document.getElementById('dailyActivities').value);
-            const asp = parseFloat(document.getElementById('asp').value);
+            const monthlyCalls = parseFloat(document.getElementById('calls').value);
+            const monthlyEmails = parseFloat(document.getElementById('emails').value);
+            const monthlyDeals = parseFloat(document.getElementById('deals').value);
+            const monthlyDiscoveryCalls = parseFloat(document.getElementById('discoveryCalls').value);
+            const monthlyDemos = parseFloat(document.getElementById('demos').value);
             const monthlyQuota = parseFloat(document.getElementById('monthlyQuota').value);
             const closeRate = parseFloat(document.getElementById('closeRate').value) / 100;
+            const dailyActivities = monthlyCalls + monthlyEmails;
 
             // Validate inputs
             if (isNaN(daysOff) || daysOff <= 0) {
@@ -189,12 +212,24 @@
                 showMessage("Please enter a valid number of days to frontload.");
                 return;
             }
-            if (isNaN(dailyActivities) || dailyActivities <= 0) {
-                showMessage("Please enter a valid number of daily prospecting activities.");
+            if (isNaN(monthlyCalls) || monthlyCalls <= 0) {
+                showMessage("Please enter a valid number of monthly calls.");
                 return;
             }
-            if (isNaN(asp) || asp <= 0) {
-                showMessage("Please enter a valid Average Selling Price (ASP).");
+            if (isNaN(monthlyEmails) || monthlyEmails <= 0) {
+                showMessage("Please enter a valid number of monthly emails.");
+                return;
+            }
+            if (isNaN(monthlyDeals) || monthlyDeals <= 0) {
+                showMessage("Please enter a valid number of monthly deals.");
+                return;
+            }
+            if (isNaN(monthlyDiscoveryCalls) || monthlyDiscoveryCalls <= 0) {
+                showMessage("Please enter a valid number of monthly discovery calls.");
+                return;
+            }
+            if (isNaN(monthlyDemos) || monthlyDemos <= 0) {
+                showMessage("Please enter a valid number of monthly demos.");
                 return;
             }
             if (isNaN(monthlyQuota) || monthlyQuota <= 0) {
@@ -207,46 +242,52 @@
             }
 
             // Calculation Logic
-            // Based on user-provided KPIs
-            const TALK_TIME_PER_DAY = 15;
-            const DISCOVERY_CALLS_PER_MONTH = 20;
-            const DEMOS_PER_MONTH = 12;
+            const callsToDealRatio = monthlyCalls / monthlyDeals;
+            const emailsToDealRatio = monthlyEmails / monthlyDeals;
+            const activitiesToDealRatio = callsToDealRatio + emailsToDealRatio;
+            
+            const discoveryCallsToDealRatio = monthlyDiscoveryCalls / monthlyDeals;
+            const demosToDealRatio = monthlyDemos / monthlyDeals;
 
-            // Step 1: Calculate the expected deals lost due to time off
-            const dealsLostPerDay = dailyActivities * PROSPECTING_TO_MEETING_RATE * closeRate;
-            const totalDealsLost = dealsLostPerDay * daysOff;
+            // Deals needed to hit quota
+            const dealsNeededForQuota = monthlyQuota / (monthlyQuota / monthlyDeals / closeRate);
+            
+            // Calculate missed deals
+            const dealsPerDay = monthlyDeals / WORK_DAYS_PER_MONTH;
+            const dealsMissed = dealsPerDay * daysOff;
+            const dealsGoal = Math.ceil(dealsNeededForQuota + dealsMissed);
 
-            // Step 2: Calculate the number of activities needed to generate those deals
-            const activitiesGoal = Math.ceil(totalDealsLost / (PROSPECTING_TO_MEETING_RATE * closeRate));
+            // Calculate total activities needed to frontload
+            const totalActivitiesToFrontload = Math.ceil(dealsMissed * activitiesToDealRatio);
+            const totalCallsToFrontload = Math.ceil(dealsMissed * callsToDealRatio);
+            const totalEmailsToFrontload = Math.ceil(dealsMissed * emailsToDealRatio);
+            const totalDiscoveryCallsToFrontload = Math.ceil(dealsMissed * discoveryCallsToDealRatio);
+            const totalDemosToFrontload = Math.ceil(dealsMissed * demosToDealRatio);
+            
+            // Calculate daily goals
+            const dailyCallsGoal = Math.ceil(totalCallsToFrontload / daysToFrontload);
+            const dailyEmailsGoal = Math.ceil(totalEmailsToFrontload / daysToFrontload);
+            const dailyActivitiesGoal = Math.ceil(totalActivitiesToFrontload / daysToFrontload);
+            const dailyDiscoveryCallsGoal = Math.ceil(totalDiscoveryCallsToFrontload / daysToFrontload);
+            const dailyDemosGoal = Math.ceil(totalDemosToFrontload / daysToFrontload);
 
-            // Step 3: Calculate the daily frontloading goal for activities
-            const dailyGoal = Math.ceil(activitiesGoal / daysToFrontload);
-
-            // Step 4: Calculate the total pipeline value that would be missed
-            const pipelineValuePreserved = totalDealsLost * asp;
-
-            // Step 5: Calculate the pipeline value as a percentage of the monthly quota
-            const quotaPercentage = (pipelineValuePreserved / monthlyQuota) * 100;
+            const pipelineValuePreserved = dealsMissed * (monthlyQuota / dealsNeededForQuota);
 
             // New Calculations for additional KPIs
+            const TALK_TIME_PER_DAY = 15;
             const missedTalkTime = daysOff * TALK_TIME_PER_DAY;
             const dailyTalkTimeGoal = Math.ceil(missedTalkTime / daysToFrontload);
 
-            const missedDiscoveryCalls = (DISCOVERY_CALLS_PER_MONTH / WORK_DAYS_PER_MONTH) * daysOff;
-            const dailyDiscoveryCallsGoal = Math.ceil(missedDiscoveryCalls / daysToFrontload);
-
-            const missedDemos = (DEMOS_PER_MONTH / WORK_DAYS_PER_MONTH) * daysOff;
-            const dailyDemosGoal = Math.ceil(missedDemos / daysToFrontload);
-
-
             // Display results
-            document.getElementById('activitiesGoal').innerText = activitiesGoal.toLocaleString();
-            document.getElementById('dailyGoal').innerText = dailyGoal.toLocaleString();
-            document.getElementById('quotaPercentage').innerText = quotaPercentage.toFixed(1) + "%";
+            document.getElementById('activitiesGoal').innerText = totalActivitiesToFrontload.toLocaleString();
+            document.getElementById('dailyGoal').innerText = dailyActivitiesGoal.toLocaleString();
+            document.getElementById('quotaPercentage').innerText = (pipelineValuePreserved / monthlyQuota * 100).toFixed(1) + "%";
             document.getElementById('dailyTalkTimeGoal').innerText = dailyTalkTimeGoal.toLocaleString() + " mins";
             document.getElementById('dailyDiscoveryCallsGoal').innerText = dailyDiscoveryCallsGoal.toLocaleString();
             document.getElementById('dailyDemosGoal').innerText = dailyDemosGoal.toLocaleString();
-            
+            document.getElementById('dailyCallsGoal').innerText = dailyCallsGoal.toLocaleString();
+            document.getElementById('dailyEmailsGoal').innerText = dailyEmailsGoal.toLocaleString();
+
             document.getElementById('results').classList.remove('hidden');
         }
     </script>
